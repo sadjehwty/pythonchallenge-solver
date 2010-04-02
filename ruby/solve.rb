@@ -31,7 +31,7 @@ def l1  # http://www.pythonchallenge.com/pc/def/274877906944.html
 end
 
 def l2  # http://www.pythonchallenge.com/pc/def/ocr.html
-  s=File.read 'rc/2.txt'
+  s=File.read '../resources/2.txt'
   temp=""
   s.size.times do |i|
     temp<< s[i,1] if s.count(s[i,1])<20
@@ -40,7 +40,7 @@ def l2  # http://www.pythonchallenge.com/pc/def/ocr.html
 end
 
 def l3  # http://www.pythonchallenge.com/pc/def/equality.html
-  s=File.read 'rc/3.txt'
+  s=File.read '../resources/3.txt'
   temp=""
   s.scan(/[a-z][A-Z]{3}([a-z])[A-Z]{3}[a-z]/).each do |l|
     temp<< l[0]
@@ -95,14 +95,14 @@ def l5  # http://www.pythonchallenge.com/pc/def/peak.html
       end
     end
   end
-  load(open("rc/banner.p")).map{|row|row.inject(""){|r,(k,v)|r+=k*v}}
+  load(open("../resources/banner.p")).map{|row|row.inject(""){|r,(k,v)|r+=k*v}}
 end
 
 def l6  # http://www.pythonchallenge.com/pc/def/channel.html
   require 'zipruby'
   i="90052"
   f=""
-  Zip::Archive.open("rc/channel.zip"){ |file|
+  Zip::Archive.open("../resources/channel.zip"){ |file|
     begin
       l=file.locate_name "#{i}.txt"
       f<< file.get_fcomment(l)
@@ -116,7 +116,7 @@ end
 def l7  # http://www.pythonchallenge.com/pc/def/oxygen.html
   require 'RMagick'
   include Magick
-  i=ImageList.new 'rc/oxygen.png'
+  i=ImageList.new '../resources/oxygen.png'
   j=2
   t=""
   while j<607
@@ -169,7 +169,7 @@ def l9  # http://www.pythonchallenge.com/pc/return/good.html
     158,121,157,128,156,134,157,136,156,136]
   d=Draw.new
   d.stroke 'red'
-  im=ImageList.new 'rc/good.jpg'
+  im=ImageList.new '../resources/good.jpg'
   a=first+second
   l=a.length/4
   l.times do |i|
@@ -214,7 +214,7 @@ end
 def l11 # http://www.pythonchallenge.com/pc/return/5808.html
   require 'RMagick'
   include Magick
-  ini=ImageList.new 'rc/cave.jpg'
+  ini=ImageList.new '../resources/cave.jpg'
   out=Image.new ini.columns,ini.rows/2
   x=0
   while x<ini.columns
@@ -232,7 +232,7 @@ def l11 # http://www.pythonchallenge.com/pc/return/5808.html
 end
 
 def l12 # http://www.pythonchallenge.com/pc/return/evil.html
-  s=File.read 'rc/evil2.gfx'
+  s=File.read '../resources/evil2.gfx'
   out=[]
   5.times do |i|
     out[i]=[]
@@ -313,7 +313,7 @@ def l14 # http://www.pythonchallenge.com/pc/return/italy.html
     end
     [x,y]
   end
-  im=ImageList.new 'rc/wire.png'
+  im=ImageList.new '../resources/wire.png'
   out=Image.new 100,100
   10000.times do |i|
     px=get i
@@ -349,7 +349,7 @@ return i-1 if (img.pixel_color(i,0)<=> px).zero?
 end
 end
 
-img = ImageList.new "rc/mozart.gif"
+img = ImageList.new "../resources/mozart.gif"
 img.rows.times do |y|
   row=img.crop(0,y,img.columns,1)
   i = get row
@@ -392,7 +392,7 @@ end
 def l18 # http://www.pythonchallenge.com/pc/return/balloons.html
 require 'zlib'
 a=""
-Zlib::GzipReader.open 'rc/deltas.gz' do |g| a=g.read end
+Zlib::GzipReader.open '../resources/deltas.gz' do |g| a=g.read end
 def str s
   return "" if s.nil? or s.length<1
   ret=""
@@ -440,7 +440,7 @@ end
 
 def l19 # http://www.pythonchallenge.com/pc/hex/bin.html
  require 'base64'
- f=Base64.decode64 File.read('rc/19.eml')
+ f=Base64.decode64 File.read('../resources/19.eml')
  require 'audiofile'
  a=AudioFile.new( "19.wav", "w" )
  a.rate=22050
@@ -483,7 +483,7 @@ end
 def l21
 require 'zlib'
 require 'bz2'
-out=File.open('rc/package.pack').read
+out=File.open('../resources/package.pack').read
 ret=""
 loop do
  case out[0..1]
@@ -507,7 +507,7 @@ end
 def l22 # http://www.pythonchallenge.com/pc/hex/copper.html
 require 'RMagick'
 include Magick
-img=ImageList.new 'rc/white.gif'
+img=ImageList.new '../resources/white.gif'
 point=[]
 img.each do |i|
  i.each_pixel do |p,c,r|
@@ -527,7 +527,7 @@ out.write '22.gif'
 end
 
 def l23 # http://www.pythonchallenge.com/pc/hex/bonus.html
- s=File.read 'rc/23.txt'
+ s=File.read '../resources/23.txt'
  $1 if s=~ /In the face of (\w+)/
 end
 
@@ -535,7 +535,7 @@ def l24 # http://www.pythonchallenge.com/pc/hex/ambiguity.html
 from,to=639, 410241
 require 'RMagick'
 include Magick
-img = Image.read('rc/maze.png').first
+img = Image.read('../resources/maze.png').first
 delta=img.columns
 maxY=img.rows
 img=img.get_pixels(0, 0,delta, maxY)
@@ -617,7 +617,7 @@ end
 
 def l26 # http://www.pythonchallenge.com/pc/hex/decent.html
 require 'digest/md5'
-s=File.read 'rc/mybroken.zip'
+s=File.read '../resources/mybroken.zip'
 b=false
 f="mybroken.gif"
 s.length.times do |i|
@@ -645,13 +645,13 @@ end
 def l27 # http://www.pythonchallenge.com/pc/hex/speedboat.html
   require 'RMagick'
   include Magick
-  img=Image.read('rc/zigzag.gif').first
+  img=Image.read('../resources/zigzag.gif').first
   a=img.get_pixels 0,0,320,270
   atad=""
   q=QuantumRange+1
   q/=256
   a.each do |p| atad<< (p.red/q) end
-  f=File.read('rc/zigzag.gif')[13...13+256*3]
+  f=File.read('../resources/zigzag.gif')[13...13+256*3]
   palette=""
   (0...f.length).step(3) do |c| palette<< f[c] end
   ettelap=[]
@@ -702,7 +702,7 @@ end
 def l28 # http://www.pythonchallenge.com/pc/ring/bell.html
   require 'RMagick'
   include Magick
-  img=Image.read('rc/bell.png').first
+  img=Image.read('../resources/bell.png').first
   green=""
   q=(QuantumRange+1)/256
   img=img.get_pixels 0,0,img.columns,img.rows
@@ -721,7 +721,7 @@ def l28 # http://www.pythonchallenge.com/pc/ring/bell.html
 end
 
 def l29 # http://www.pythonchallenge.com/pc/ring/guido.html
-  s=File.read 'rc/silence.txt'
+  s=File.read '../resources/silence.txt'
   n=""
   s.each do |l| n<< (l.length-2).chr end
   require 'bz2'
@@ -730,7 +730,7 @@ def l29 # http://www.pythonchallenge.com/pc/ring/guido.html
 end
 
 def l30 # http://www.pythonchallenge.com/pc/ring/yankeedoodle.html
-  f=File.read "rc/yankeedoodle.csv"
+  f=File.read "../resources/yankeedoodle.csv"
   a=f.split(/\s/)
   a.delete ""
   n=[]
@@ -767,7 +767,7 @@ def l31 # http://www.pythonchallenge.com/pc/ring/grandpa.html
   require 'tempfile'
   require 'complex'
   include Magick
-  f=File.read('rc/mandelbrot.gif')
+  f=File.read('../resources/mandelbrot.gif')
   f[13+124*3]="\374\000\000\375\000\000\376\000\000\377\000\000"
   img=Tempfile.open("my.gif")
   img.write f
@@ -853,8 +853,8 @@ def l32 # http://www.pythonchallenge.com/pc/rock/arecibo.html
   end
   ret
  end
- s=solve("rc/warmup.txt")
- s=solve("rc/up.txt")
+ s=solve("../resources/warmup.txt")
+ s=solve("../resources/up.txt")
  "free speech, not free beer"=~/free speech, not free (.+)/
  $1
 end
@@ -893,7 +893,7 @@ def l33 # http://www.pythonchallenge.com/pc/rock/beer.html
   [max,max1]
  end
 
- img=Image.read("rc/beer2.png").first
+ img=Image.read("../resources/beer2.png").first
  g=[15,17,21,22,24,26,27,29]
  i=0
  m=max img
