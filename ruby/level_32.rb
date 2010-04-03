@@ -1,27 +1,27 @@
 # http://www.pythonchallenge.com/pc/rock/arecibo.html
 require 'rubygems'
+require 'gecoder' 
+include Gecode::Mixin
 class Nonogram 
- require 'gecoder' 
- include Gecode::Mixin
- def initialize(row_rules, col_rules)
-  filled_is_an bool_var_matrix(row_rules.size, col_rules.size)
-  row_rules.each_with_index do |row_rule, i| 
-   filled.row(i).must.match parse_regex(row_rule)
+  def initialize(row_rules, col_rules)
+    filled_is_an bool_var_matrix(row_rules.size, col_rules.size)
+    row_rules.each_with_index do |row_rule, i| 
+     filled.row(i).must.match parse_regex(row_rule)
+    end
+    col_rules.each_with_index do |col_rule, i|
+      filled.column(i).must.match parse_regex(col_rule)
+    end
+    branch_on filled, :variable => :none, :value => :max
   end
-  col_rules.each_with_index do |col_rule, i|
-   filled.column(i).must.match parse_regex(col_rule)
+  def parse_regex(a)
+    r = [repeat(false)]
+    a.each_with_index do |e,i| 
+      r << repeat(true,e,e)
+      r << at_least_once(false)  if i < a.length-1
+    end
+    r << repeat(false)
+    r
   end
-  branch_on filled, :variable => :none, :value => :max
- end
- def parse_regex(a)
-  r = [repeat(false)]
-  a.each_with_index do |e,i| 
-   r << repeat(true,e,e)
-   r << at_least_once(false)  if i < a.length-1
-  end
-  r << repeat(false)
-  r
- end
 end
 
 def solve s
@@ -53,7 +53,8 @@ def solve s
   end
   ret
 end
-s=solve("../resources/warmup.txt")
-s=solve("../resources/up.txt")
+['warmup','up'].each do |s|
+  File.open("#{s}.txt","w"){|f| f.write solve("../resources/#{s}.txt")}
+end
 "free speech, not free beer"=~/free speech, not free (.+)/
 puts $1
