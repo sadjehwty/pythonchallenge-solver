@@ -1,7 +1,0 @@
-This version needs of following rubygems
-bz2             => http://rubygems.org/gems/bz2
-libxml-xmlrpc   => http://rubygems.org/gems/libxml-xmlrpc
-rmagick         => http://rubygems.org/gems/rmagick
-zipruby         => http://rubygems.org/gems/zipruby
-ruby-audiofile  => http://ruby-audiofile.sourceforge.net/
-gecoder         => http://rubygems.org/gems/gecoder or http://rubygems.org/gems/gecoder-with-gecode

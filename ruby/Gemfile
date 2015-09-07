@@ -1,0 +1,7 @@
+ruby "2.1.4"
+gem "bz2"            # http://rubygems.org/gems/bz2
+gem "libxml-xmlrpc"  # http://rubygems.org/gems/libxml-xmlrpc
+gem "rmagick"        # http://rubygems.org/gems/rmagick
+gem "zipruby"        # http://rubygems.org/gems/zipruby
+gem "ruby-audiofile" # http://ruby-audiofile.sourceforge.net/
+gem "gecoder"        # http://rubygems.org/gems/gecoder or http://rubygems.org/gems/gecoder-with-gecode
