@@ -4,7 +4,7 @@ if (n=gets.chomp) != 'all'
   load "level_#{n}.rb"
 else
   34.times do |i|
-    puts "#{i}° ---"
+    puts "#{i}Â° ---"
     load "level_#{i}.rb"
   end
 end
