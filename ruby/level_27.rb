@@ -1,8 +1,8 @@
 # http://www.pythonchallenge.com/pc/hex/speedboat.html
-require 'rubygems'
 require 'RMagick'
 include Magick
-require 'bz2'
+require 'rbzip2'
+require 'tempfile'
 require 'net/http'
 img=Image.read('../resources/zigzag.gif').first
 a=img.get_pixels 0,0,320,270
@@ -33,7 +33,12 @@ end
 key=Image.new(320,270)
 key.store_pixels 0,0,320,270,px<< white
 key.write '27.gif'
-f=BZ2::bunzip2 f
+t=Tempfile.new 'tmp'
+t.write f
+t.rewind
+bz2  = RBzip2::Decompressor.new t
+f=bz2.read
+t.close
 a=f.split(/\s/).uniq
 ret=nil
 http=Net::HTTP.new "www.pythonchallenge.com",80

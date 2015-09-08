@@ -1,8 +1,13 @@
 # http://www.pythonchallenge.com/pc/ring/guido.html
-require 'rubygems'
-require 'bz2'
+require 'tempfile'
+require 'rbzip2'
 s=File.read '../resources/silence.txt'
 n=""
 s.each do |l| n<< (l.length-2).chr end
-BZ2::bunzip2(n) =~ /I am (.+)!/
+t=Tempfile.new 'tmp'
+t.write n
+t.rewind
+bz2  = RBzip2::Decompressor.new t
+bz2.read =~ /I am (.+)!/
+t.close
 puts $1

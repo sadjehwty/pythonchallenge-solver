@@ -1,7 +1,7 @@
 # http://www.pythonchallenge.com/pc/return/romance.html
-require 'rubygems'
+require 'tempfile'
 require 'net/http'
-require 'bz2'
+require 'rbzip2'
 def cicle i
  ret=""
  begin
@@ -17,8 +17,11 @@ def cicle i
  end while i
  ret
 end
-bz2=cicle("12345")
-ret=BZ2::bunzip2 bz2
+t=Tempfile.new 'tmp'
+t.write cicle("12345")
+t.rewind
+ret=RBzip2::Decompressor.new t
+ret=ret.read
 require 'xmlrpc/client'
 server = XMLRPC::Client.new2('http://www.pythonchallenge.com/pc/phonebook.php')
 url="/pc/stuff/"+(server.call("phone","Leopold")=~/-(.+)/?$1.downcase():"")+".php"

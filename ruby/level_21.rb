@@ -1,6 +1,6 @@
-require 'rubygems'
 require 'zlib'
-require 'bz2'
+require 'rbzip2'
+require 'tempfile'
 out=File.open('../resources/package.pack').read
 ret=""
 loop do
@@ -9,7 +9,12 @@ loop do
    out=Zlib::Inflate.inflate out
    ret<< " "
   when "BZ"
-   out=BZ2.uncompress out
+   t=Tempfile.new 'tmp'
+   t.write out
+   t.rewind
+   bz2  = RBzip2::Decompressor.new t
+   out=bz2.read
+   t.close
    ret<< "#"
   else
    t=out[-2..-1].reverse
