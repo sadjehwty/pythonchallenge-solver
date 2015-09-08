@@ -1,6 +1,5 @@
 # http://www.pythonchallenge.com/pc/hex/copper.html
-require 'rubygems'
-require 'RMagick'
+require 'rmagick'
 include Magick
 img=ImageList.new '../resources/white.gif'
 point=[]

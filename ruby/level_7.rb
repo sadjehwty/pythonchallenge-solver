@@ -1,6 +1,5 @@
 # http://www.pythonchallenge.com/pc/def/oxygen.html
-require 'rubygems'
-require 'RMagick'
+require 'rmagick'
 include Magick
 i=ImageList.new '../resources/oxygen.png'
 j=2

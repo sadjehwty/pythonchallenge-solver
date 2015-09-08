@@ -1,6 +1,5 @@
 # http://www.pythonchallenge.com/pc/return/5808.html
-require 'rubygems'
-require 'RMagick'
+require 'rmagick'
 include Magick
 ini=ImageList.new '../resources/cave.jpg'
 out=Image.new ini.columns,ini.rows/2
