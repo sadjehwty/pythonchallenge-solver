@@ -1,11 +1,12 @@
+#encoding: ascii-8bit
 require 'zlib'
 require 'rbzip2'
 require 'tempfile'
-out=File.open('../resources/package.pack').read
+out=File.open('../resources/package.pack', {encoding: 'ascii-8bit'}).read
 ret=""
 loop do
  case out[0..1]
-  when "x\234"
+  when "x\x9C"
    out=Zlib::Inflate.inflate out
    ret<< " "
   when "BZ"
@@ -18,7 +19,7 @@ loop do
    ret<< "#"
   else
    t=out[-2..-1].reverse
-   if t=="BZ" or t=="x\234"
+   if t=="BZ" or t=="x\x9C"
     out.reverse!
     ret<< "\n"
    else break end
