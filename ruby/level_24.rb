@@ -1,7 +1,6 @@
 # http://www.pythonchallenge.com/pc/hex/ambiguity.html
-require 'rubygems'
 require 'zipruby'
-require 'RMagick'
+require 'rmagick'
 require 'tempfile'
 include Magick
 from,to=639, 410241

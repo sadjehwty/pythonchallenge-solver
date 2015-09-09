@@ -1,5 +1,5 @@
 # http://www.pythonchallenge.com/pc/hex/speedboat.html
-require 'RMagick'
+require 'rmagick'
 include Magick
 require 'rbzip2'
 require 'tempfile'
@@ -10,11 +10,11 @@ atad=""
 q=QuantumRange+1
 q/=256
 a.each do |p| atad<< (p.red/q) end
-f=File.read('../resources/zigzag.gif')[13...13+256*3]
+f=File.open('../resources/zigzag.gif',{encoding: 'ascii-8bit'}).read()[13...13+256*3]
 palette=""
 (0...f.length).step(3) do |c| palette<< f[c] end
 ettelap=[]
-palette.length.times do |i| ettelap[palette[i]]=i end
+palette.length.times do |i| ettelap[palette[i].ord]=i end
 data=""
 atad.each_byte do |b| data<< ettelap[b] end
 f=""

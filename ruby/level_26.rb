@@ -3,7 +3,7 @@ require 'rubygems'
 require 'digest/md5'
 require 'tempfile'
 require 'zipruby'
-s=File.read '../resources/mybroken.zip'
+s=File.open('../resources/mybroken.zip',{encoding: 'ascii-8bit'}).read
 b=false
 f="mybroken.gif"
 s.length.times do |i|
