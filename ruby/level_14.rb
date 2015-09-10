@@ -1,6 +1,5 @@
 # http://www.pythonchallenge.com/pc/return/italy.html
-require 'rubygems'
-require 'RMagick'
+require 'rmagick'
 include Magick
 def get i
   t=i
