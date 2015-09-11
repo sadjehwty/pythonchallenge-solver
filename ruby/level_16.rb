@@ -1,6 +1,5 @@
 # http://www.pythonchallenge.com/pc/return/mozart.html
-require 'rubygems'
-require 'RMagick'
+require 'rmagick'
 include Magick
 
 def get img
