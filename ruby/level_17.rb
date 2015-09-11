@@ -5,7 +5,12 @@ require 'rbzip2'
 def cicle i
  ret=""
  begin
-  res=Net::HTTP.start("www.pythonchallenge.com",80).get("/pc/def/linkedlist.php?busynothing="+i)
+  res=nil
+  begin
+    res=Net::HTTP.start("www.pythonchallenge.com",80).get("/pc/def/linkedlist.php?busynothing="+i)
+  rescue
+    redo
+  end
   s=res.response['set-cookie']
   s=(s=~/info=(.+?);/)?$1:nil
   if s.length == 1
