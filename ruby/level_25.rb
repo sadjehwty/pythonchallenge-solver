@@ -1,4 +1,5 @@
 # http://www.pythonchallenge.com/pc/hex/lake.html
+# (255*2+a/256**2).chr 
 require 'net/http'
 require 'ruby-audio'
 require 'tempfile'
@@ -22,7 +23,12 @@ http=Net::HTTP.new "www.pythonchallenge.com",80
     t.flush
     RubyAudio::Sound.open(t.path) do |a|
       buf=a.read(:int, t.size)
-      i=Image.from_blob head+buf.to_a.map{|v| v.chr }
+      buf=buf.to_a.map do |v|
+        v= v/256**3
+	v = v >= 0 ? v : 256 + v
+	v.chr
+      end
+      i=Image.from_blob head+buf.join
       i[0].flip!
       i[0].page=Rectangle.new 300, 300, (n-1).modulo(5)*60, 60*((n-1)/5)
       list<< i[0]
