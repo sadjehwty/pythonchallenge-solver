@@ -1,6 +1,5 @@
 # http://www.pythonchallenge.com/pc/ring/bell.html
-require 'rubygems'
-require 'RMagick'
+require 'rmagick'
 include Magick
 img=Image.read('../resources/bell.png').first
 green=""
@@ -12,7 +11,7 @@ end
 i=0
 valu=""
 while i<green.length
-  v=(green[i]-green[i+1]).abs
+  v=(green[i].ord-green[i+1].ord).abs
   valu<< v.chr if v!=42
   i+=2
 end
