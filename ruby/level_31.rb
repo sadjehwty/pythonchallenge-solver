@@ -1,18 +1,17 @@
 # http://www.pythonchallenge.com/pc/ring/grandpa.html
-require 'rubygems'
-require 'RMagick'
+require 'rmagick'
 require 'tempfile'
 require 'complex'
 include Magick
-f=File.read('../resources/mandelbrot.gif')
-f[13+124*3]="\374\000\000\375\000\000\376\000\000\377\000\000"
+f=File.open('../resources/mandelbrot.gif', encoding: 'ascii-8bit').read
+f[13+124*3]="\374\000\000\375\000\000\376\000\000\377\000\000".force_encoding Encoding::ASCII_8BIT
 img=Tempfile.open("my.gif")
 img.write f
 img.flush
 q=QuantumRange/255
 palette=[]
 f=f[13...13+128*3]
-(0...f.length).step(3) do |c| palette<< Pixel.new(q*f[c],q*f[c+1],q*f[c+2],0) end
+(0...f.length).step(3) do |c| palette<< Pixel.new(q*f[c].ord,q*f[c+1].ord,q*f[c+2].ord,0) end
 img=Image.read(img.path).first
 img.flip!
 x=img.columns
