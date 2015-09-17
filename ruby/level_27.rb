@@ -11,13 +11,13 @@ q=QuantumRange+1
 q/=256
 a.each do |p| atad<< (p.red/q) end
 f=File.open('../resources/zigzag.gif',{encoding: 'ascii-8bit'}).read()[13...13+256*3]
-palette=""
+palette="".force_encoding Encoding::ASCII_8BIT
 (0...f.length).step(3) do |c| palette<< f[c] end
 ettelap=[]
 palette.length.times do |i| ettelap[palette[i].ord]=i end
-data=""
+data="".force_encoding Encoding::ASCII_8BIT
 atad.each_byte do |b| data<< ettelap[b] end
-f=""
+f="".force_encoding Encoding::ASCII_8BIT
 p1,p2=data[1...data.length],atad[0...data.length-1]
 black=Pixel.from_color 'black'
 white=Pixel.from_color 'white'
@@ -33,8 +33,8 @@ end
 key=Image.new(320,270)
 key.store_pixels 0,0,320,270,px<< white
 key.write '27.gif'
-t=Tempfile.new 'tmp'
-t.write f
+t=Tempfile.new 'tmp', encoding: 'ascii-8bit'
+t.write f.force_encoding Encoding::ASCII_8BIT
 t.rewind
 bz2  = RBzip2::Decompressor.new t
 f=bz2.read
