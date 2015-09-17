@@ -6,7 +6,7 @@ require 'tempfile'
 require 'net/http'
 img=Image.read('../resources/zigzag.gif').first
 a=img.get_pixels 0,0,320,270
-atad=""
+atad="".force_encoding Encoding::ASCII_8BIT
 q=QuantumRange+1
 q/=256
 a.each do |p| atad<< (p.red/q) end

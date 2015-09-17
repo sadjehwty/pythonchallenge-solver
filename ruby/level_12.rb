@@ -1,5 +1,5 @@
 # http://www.pythonchallenge.com/pc/return/evil.html
-s=File.read '../resources/evil2.gfx'
+s=File.open('../resources/evil2.gfx', encoding: 'ascii-8bit').read 
 out=[]
 5.times do |i|
   out[i]=[]

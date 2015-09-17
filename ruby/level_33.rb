@@ -1,6 +1,5 @@
 # http://www.pythonchallenge.com/pc/rock/beer.html
-require 'rubygems'
-require 'RMagick'
+require 'rmagick'
 include Magick
 
 def histo img
