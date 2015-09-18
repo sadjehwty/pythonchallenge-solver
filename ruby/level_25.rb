@@ -1,12 +1,11 @@
 # http://www.pythonchallenge.com/pc/hex/lake.html
-# (255*2+a/256**2).chr 
 require 'net/http'
 require 'ruby-audio'
 require 'tempfile'
 require 'rmagick'
 include Magick
 list=ImageList.new
-head="BMf*\000\000\000\000\000\0006\000\000\000(\000\000\000<\000\000\000<\000\000\000\001\000\030\000\000\000\000\0000*\000\000\023\v\000\000\023\v\000\000\000\000\000\000\000\000\000\000"
+head="BMf*\x00\x00\x00\x00\x00\x006\x00\x00\x00(\x00\x00\x00<\x00\x00\x00<\x00\x00\x00\x01\x00\x18\x00\x00\x00\x00\x000*\x00\x00\x13\v\x00\x00\x13\v\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00".force_encoding Encoding::ASCII_8BIT
 http=Net::HTTP.new "www.pythonchallenge.com",80
 (1..25).each do |n|
   req= Net::HTTP::Get.new "/pc/hex/lake#{n}.wav"
@@ -17,15 +16,14 @@ http=Net::HTTP.new "www.pythonchallenge.com",80
   rescue
     redo
   end
-  name="lake#{n}.png"
-  Tempfile.open("temp") do |t|
-    t.write ret.force_encoding Encoding::ASCII_8BIT
+  Tempfile.open("temp", encoding: 'ascii-8bit') do |t|
+    t.write ret
     t.flush
     RubyAudio::Sound.open(t.path) do |a|
-      buf=a.read(:int, t.size)
+      buf=a.read(:short, t.size)
       buf=buf.to_a.map do |v|
-        v= v/256**3
-	v = v >= 0 ? v : 256 + v
+        v /= 256
+	v += 128
 	v.chr
       end
       i=Image.from_blob head+buf.join
@@ -37,4 +35,3 @@ http=Net::HTTP.new "www.pythonchallenge.com",80
 end
 list.mosaic.write "25.bmp"
 puts "Open 25.bmp"
-
